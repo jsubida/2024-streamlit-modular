@@ -1,5 +1,6 @@
 {
     "id": "give_up",
+    "intro_interest": "I'd be really interested to hear about a time when you felt like you wanted to give up on trying to lose weight. I'll ask you a few questions and then we'll try to make a story out of it.  We’ll share it with people who are trying to help others who might be facing similar challenges.",
     "conversation_interest": "you are interested in collecting information about a time when they wanted to give up on trying to lose weight",
     "scenario": "I'd been putting a lot of effort into improving my diet and sticking to a regular exercise routine. After about a month of hard work, I was upset to see that I had actually gained a few pounds instead of losing them. This made me feel incredibly frustrated and hopeless, like all the effort I had put in was pointless. I began to doubt whether I could ever succeed in my weight loss journey. I was on the verge of giving up when I talked to a friend who reminded me that setbacks are a normal part of the process. They suggested that I focus on non-scale victories, like how my clothes were fitting better and I had more energy This conversation re-motivated me to keep going, and I decided to shift my focus from just the numbers on the scale to how I was feeling overall.",
     "examples": [

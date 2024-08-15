@@ -114,7 +114,17 @@ def getData(testing=False):
 
     # if this is the first run, set up the intro
     if len(msgs.messages) == 0:
-        msgs.add_ai_message("Today I’m helping people share stories about experiences with trying to lose weight. I’m doing that so they can help their support people understand better what the weight loss journey feels like for the person who’s actually going through it. \n \n I'd be really interested to hear about a time when you felt like you wanted to give up on trying to lose weight. I'll ask you a few questions and then we'll try to make a story out of it.  We’ll share it with people who are trying to help others who might be facing similar challenges.  \n\n  Let me know when you're ready!")
+        intro = f"""
+        Today I'm helping people share stories about experiences with trying to
+        lose weight. I'm doing that so they can help their support people
+        understand better what the weight loss journey feels like for the person
+        who's actually going through it.
+        \n\n
+        {template_service.intro_interest}
+        \n\n
+        Let me know when you're ready!
+        """
+        msgs.add_ai_message(intro)
 
    # as Streamlit refreshes page after each input, we have to refresh all messages.
    # in our case, we are just interested in showing the last AI-Human turn of the conversation for simplicity

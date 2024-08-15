@@ -1,0 +1,28 @@
+{
+    "id": "helped",
+    "intro_interest": "I'd be really interested to hear about a time when someone said or did something that really helped you when you were trying to lose weight. I'll ask you a few questions and then we'll try to make a story out of it.  We’ll share it with people who are trying to help others who might be in similar situations.",
+    "conversation_interest": "you are interested in collecting information about a time when someone said or did something that really helped you when you were trying to lose weight",
+    "scenario": "A while back I was really struggling to lose weight, and was failing over and over again.  Surprisingly, my sister-in-law pulled me aside and said some things that really helped me.  She reminded me that after she had my nephew, it took her a really long time to lose weight. I'd forgotten about that because she's always looked so fit and trim - both before that baby, and ever since.  She seemed to really care, and that meant a lot to me",
+    "examples": [
+        {
+            "question": "Who was this person and why do you think they got involved?",
+            "answer": "It was my sister-in-law.  I think she just felt sorry for me when she saw me struggling and failing so much.  She'd been there herself - trying and failing to lose weight - and I think her heart went out to me.  She reminded me that it was foolish to reduce my value as a person down to a number on a scale.  She reassured me about how much the whole family would still love me, whether or not I lost much or  even any weight.  Her words helped me feel a lot better supported and less stressed.  It would have been even more helpful if she'd showed me some cooking and eating tricks that worked for her, or if she'd offered to come exercise with me.  And if I had my wildest dream about how to lose weight, I'd be whisked away to a tropical island where someone would prepare delicious, calorie-controlled meals and I could swim in the beautiful sea.",
+            "key": "who"
+        },
+        {
+            "question": "What was the most helpful thing they did to support you?",
+            "answer": "She just let me know I wasn't alone - not the only person who had so much trouble losing weight.  Plus she reassured me that my value as a person was much more than my weight and appearance - that it wouldn't be the end of the world if I didn't lose anything or just a little bit.  That took some of the stress off.  She reassured me about how much the whole family, including her brother (my husband) would still love me, whether or not I lost much or  even any weight.  Her words helped me feel a lot better supported and less stressed.",
+            "key": "what"
+        },
+        {
+            "question": "How do you think they could have helped even more?",
+            "answer": "It would have been even more helpful if she'd showed me some tips about how to eat lighter AND offered to go walk or exercise with me sometime.",
+            "key": "how"
+        },
+        {
+            "question": "If you had a magic wand and could ask for anything, what kind of weight loss support do you wish you could receive?",
+            "answer": "To be whisked away to an island paradise where I could swim, sunbathe, and read all day and where someone would prepare all my delicious, portion- and calorie-controlled meals.",
+            "key": "wand"
+        }
+    ]
+}

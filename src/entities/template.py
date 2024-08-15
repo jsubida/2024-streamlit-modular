@@ -8,6 +8,9 @@ class Template:
     id: str
     """The id of the template"""
 
+    intro_interest: str
+    """The introduction to the conversation"""
+
     conversation_interest: str
     """The topic of interest for the conversation"""
 

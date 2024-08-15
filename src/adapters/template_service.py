@@ -16,6 +16,10 @@ class TemplateService:
         return self.template.conversation_interest
 
     @property
+    def intro_interest(self) -> str:
+        return self.template.intro_interest
+
+    @property
     def project_name(self) -> str:
         return self.template.id
 
