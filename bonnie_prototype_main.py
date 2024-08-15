@@ -1,30 +1,19 @@
-
-
-from langchain_community.chat_message_histories import StreamlitChatMessageHistory
-from langchain.memory import ConversationBufferMemory
-from langchain_core.prompts import PromptTemplate
-from langchain.chains import ConversationChain
-from langchain_openai import ChatOpenAI
-from langchain.output_parsers.json import SimpleJsonOutputParser
-from langsmith import Client
-from langsmith import traceable
-from langsmith.run_helpers import get_current_run_tree
-from streamlit_feedback import streamlit_feedback
-
-from functools import partial
-
 import os
 
 import streamlit as st
-
-
-## import our prompts: 
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+from langchain.output_parsers.json import SimpleJsonOutputParser
+from langchain_community.chat_message_histories import StreamlitChatMessageHistory
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+from langsmith import Client, traceable
+from langsmith.run_helpers import get_current_run_tree
+from streamlit_feedback import streamlit_feedback
 
 from bonnie_lc_prompts import *
 from bonnie_lc_scenario_prompts import *
-from bonnie_testing_prompts import * 
-
-
+from bonnie_testing_prompts import *
 
 # Using streamlit secrets to set environment variables for langsmith/chain
 os.environ["OPENAI_API_KEY"] = st.secrets['OPENAI_API_KEY']
@@ -34,7 +23,7 @@ os.environ["LANGCHAIN_TRACING_V2"] = 'true'
 
 
 ## simple switch previously used to help debug 
-DEBUG = True
+DEBUG = False
 
 # Langsmith set-up 
 smith_client = Client()
@@ -279,7 +268,7 @@ def summariseData(testing = False):
         answer_set = extractChoices(msgs, True)
     else:
         answer_set = extractChoices(msgs, False)
-    
+
     ## debug shows the interrim steps of the extracted set
     if DEBUG: 
         st.divider()
@@ -304,63 +293,31 @@ def summariseData(testing = False):
         progress_text = 'Processing your scenarios'
         bar = st.progress(0, text = progress_text)
 
+    response = {
+        "main_prompt": prompt_1,
+        "end_prompt": end_prompt
+    }
+    for key in questions_service.prompt_keys:
+        response[key] = answer_set[key]
 
     # create first scenario & store into st.session state 
-    st.session_state.response_1 = chain.invoke({
-        "main_prompt" : prompt_1,
-        "end_prompt" : end_prompt,
-        "example_what" : example_set['what'],
-        "example_emotion" : example_set['emotion'],
-        "example_worst": example_set['worst'],
-        "example_motivate" : example_set['motivate'],
-        "example_outcome" : example_set['outcome'],
-        "example_scenario" : example_set['scenario'],
-        "what" : answer_set['what'],
-        "emotion" : answer_set['emotion'],
-        "worst": answer_set['worst'],
-        "motivate" : answer_set['motivate'],
-        "outcome" : answer_set['outcome']
-    })
+    st.session_state.response_1 = chain.invoke(response)
     run_1 = get_current_run_tree()
 
     ## update progress bar
     bar.progress(33, progress_text)
 
-    st.session_state.response_2 = chain.invoke({
-        "main_prompt" : prompt_2,
-        "end_prompt" : end_prompt,
-        "example_what" : example_set['what'],
-        "example_emotion" : example_set['emotion'],
-        "example_worst": example_set['worst'],
-        "example_motivate" : example_set['motivate'],
-        "example_outcome" : example_set['outcome'],
-        "example_scenario" : example_set['scenario'],
-        "what" : answer_set['what'],
-        "emotion" : answer_set['emotion'],
-        "worst": answer_set['worst'],
-        "motivate" : answer_set['motivate'],
-        "outcome" : answer_set['outcome']
-    })
+    response["main_prompt"] = prompt_2
+
+    st.session_state.response_2 = chain.invoke(response)
     run_2 = get_current_run_tree()
 
     ## update progress bar
     bar.progress(66, progress_text)
 
-    st.session_state.response_3 = chain.invoke({
-        "main_prompt" : prompt_3,
-        "end_prompt" : end_prompt,
-        "example_what" : example_set['what'],
-        "example_emotion" : example_set['emotion'],
-        "example_worst": example_set['worst'],
-        "example_motivate" : example_set['motivate'],
-        "example_outcome" : example_set['outcome'],
-        "example_scenario" : example_set['scenario'],
-        "what" : answer_set['what'],
-        "emotion" : answer_set['emotion'],
-        "worst": answer_set['worst'],
-        "motivate" : answer_set['motivate'],
-        "outcome" : answer_set['outcome']
-    })
+    response["main_prompt"] = prompt_3
+
+    st.session_state.response_3 = chain.invoke(response)
     run_3 = get_current_run_tree()
 
     ## update progress bar after the last scenario

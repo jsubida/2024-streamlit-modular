@@ -1,0 +1,27 @@
+[
+    {
+        "question": "What happened to make you want to give up?",
+        "answer": "",
+        "key": "what"
+    },
+    {
+        "question": "How did you feel emotionally at the time?",
+        "answer": "",
+        "key": "emotion"
+    },
+    {
+        "question": "What was the worst part of this experience?",
+        "answer": "",
+        "key": "worst"
+    },
+    {
+        "question": "How did the whole situation end? (did you give up? did you keep on going?)",
+        "answer": "",
+        "key": "outcome"
+    },
+    {
+        "question": "What do you think re-motivated your weight loss effort (or could have done so)?",
+        "answer": "",
+        "key": "motivate"
+    }
+]
