@@ -24,7 +24,3 @@ class QuestionAnswerPort(abc.ABC):
     @abc.abstractmethod
     def list_questions(self, items) -> str:
         pass
-
-    @abc.abstractmethod
-    def load_json(self, filepath: str):
-        pass

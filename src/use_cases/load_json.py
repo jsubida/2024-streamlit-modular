@@ -1,10 +1,12 @@
 import json
 
 from src.entities.question_answer import QuestionAnswer
+from src.entities.template import Template
 
 
-def execute(filepath: str) -> list[QuestionAnswer]:
-    """Load questions from a JSON file."""
+def execute(filepath: str) -> Template:
+    """Load template from a JSON file."""
     with open(filepath) as f:
-        questions = json.load(f)
-    return [QuestionAnswer(**q) for q in questions]
+        raw = json.load(f)
+    raw["examples"] = [QuestionAnswer(**x) for x in raw["examples"]]
+    return Template(**raw)

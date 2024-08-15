@@ -4,12 +4,12 @@ from src.use_cases import (
     create_question_keys,
     list_keys,
     list_questions,
-    load_json,
 )
 from src.use_cases.ports.question_answer_port import QuestionAnswerPort
 
 
 class QuestionAnswerRepository(QuestionAnswerPort):
+    """A repository class that provides methods to interact with a QuestionAnswer objects."""
 
     def create_key_answers(self, items):
         return create_key_answers.execute(items)
@@ -25,6 +25,3 @@ class QuestionAnswerRepository(QuestionAnswerPort):
 
     def list_questions(self, items):
         return list_questions.execute(items)
-
-    def load_json(self, filepath):
-        return load_json.execute(filepath)
