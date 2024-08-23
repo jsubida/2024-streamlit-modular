@@ -36,7 +36,7 @@ os.environ["LANGCHAIN_TRACING_V2"] = 'true'
 print(template_service.prompt_datacollection)
 
 # simple switch previously used to help debug
-DEBUG = True
+DEBUG = False
 
 # Langsmith set-up
 smith_client = Client()
@@ -615,8 +615,7 @@ def finaliseScenario():
             key="final_package"
         )
         st.markdown(":tada: Yay! :tada:")
-        st.markdown(
-            "You've now completed the interaction and hopefully found a scenario that you liked! ")
+        st.markdown("You've now completed the interaction and hopefully found a scenario that you liked! Please return to the survey window to complete the rest of the study -- your code for Prolific is '**CyberCorgi CodeCrumbs**' ")
         st.markdown(f":green[{package['scenario']}]")
 
     # if the user still wants to continue adapting
