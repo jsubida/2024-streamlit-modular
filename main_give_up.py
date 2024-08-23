@@ -700,71 +700,42 @@ def stateAgent():
     elif st.session_state['agentState'] == 'finalise':
         finaliseScenario()
 
+# setting up the right expanders for the start of the flow
+if st.session_state['agentState'] == 'review':
+    st.session_state['exp_data'] = False
 
-def markConsent():
-    """On_submit function that marks the consent progress 
-    """
-    st.session_state['consent'] = True
+entry_messages = st.expander(
+    "Collecting your story", expanded=st.session_state['exp_data'])
 
+if st.session_state['agentState'] == 'review':
+    review_messages = st.expander("Review Scenarios")
 
-# check we have consent -- if so, run normally
-if st.session_state['consent']:
+# create the user input object
+prompt = st.chat_input()
 
-    # setting up the right expanders for the start of the flow
-    if st.session_state['agentState'] == 'review':
-        st.session_state['exp_data'] = False
-
-    entry_messages = st.expander(
-        "Collecting your story", expanded=st.session_state['exp_data'])
-
-    if st.session_state['agentState'] == 'review':
-        review_messages = st.expander("Review Scenarios")
-
-    # create the user input object
-    prompt = st.chat_input()
-
-    # Get an OpenAI API Key before continuing
-    if "openai_api_key" in st.secrets:
-        openai_api_key = st.secrets.openai_api_key
-    else:
-        openai_api_key = st.sidebar.text_input(
-            "OpenAI API Key", type="password")
-    if not openai_api_key:
-        st.info("Enter an OpenAI API Key to continue")
-        st.stop()
-
-    # Set up the LangChain for data collection, passing in Message History
-    chat = ChatOpenAI(
-        temperature=0.3, model=st.session_state.llm_model, openai_api_key=openai_api_key)
-
-    prompt_updated = PromptTemplate(
-        input_variables=["history", "input"], template=prompt_datacollection)
-
-    conversation = ConversationChain(
-        prompt=prompt_updated,
-        llm=chat,
-        verbose=True,
-        memory=memory
-    )
-
-    # start the flow agent
-    stateAgent()
-
-# we don't have consent yet -- ask for agreement and wait
+# Get an OpenAI API Key before continuing
+if "openai_api_key" in st.secrets:
+    openai_api_key = st.secrets.openai_api_key
 else:
-    print("don't have consent!")
-    consent_message = st.container()
-    with consent_message:
-        # if DEBUG:
-        #     st.markdown(f'''  :red[DEBUG] :green[-- your Prolific ID is: {st.session_state['pid']}.] :blue[Qualtrics should automatically pass the id by adding ?pid=ID_CODE_HERE to the website address when generating the link for each participant. Note that the PID will be then saved to all the final package passed onto LangSmith (for now), or be used as a key for the local database.]
-        #                 ''')
-        st.markdown(''' 
-                    ## 🎉 Welcome to our Let's-make-Bonnie-happy prototype! 🎉
+    openai_api_key = st.sidebar.text_input(
+        "OpenAI API Key", type="password")
+if not openai_api_key:
+    st.info("Enter an OpenAI API Key to continue")
+    st.stop()
 
-                    \n In this task, you’re going to engage with an internet program that asks you to talk about your experiences with weight loss.  The program is in development for now, so anything you submit will be stored on servers at University of Michigan/Northwestern University and be readable by the research team.  However, your responses will be anonymous - i.e., we will have no way of knowing who wrote the text or who you are. 
-                    
-                    \n \n **Therefore, it's important that you do not report situations that contain personal information about yourself that you are uncomfortable having others see!.** 
-                    
-                    \n \n To proceed to the task, please confirm that you have read and understood this information.
-        ''')
-        st.button("I accept", key="consent_button", on_click=markConsent)
+# Set up the LangChain for data collection, passing in Message History
+chat = ChatOpenAI(
+    temperature=0.3, model=st.session_state.llm_model, openai_api_key=openai_api_key)
+
+prompt_updated = PromptTemplate(
+    input_variables=["history", "input"], template=prompt_datacollection)
+
+conversation = ConversationChain(
+    prompt=prompt_updated,
+    llm=chat,
+    verbose=True,
+    memory=memory
+)
+
+# start the flow agent
+stateAgent()
