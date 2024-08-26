@@ -117,7 +117,7 @@ def getData(testing=False):
     if len(msgs.messages) == 0:
         intro = f"""
         Today I'm helping people share stories about experiences with trying to
-        lose weight. I'm doing that so they can help their support people
+        lose weight. I'm doing that to help their support people
         understand better what the weight loss journey feels like for the person
         who's actually going through it.
         \n\n
